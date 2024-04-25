@@ -1,21 +1,24 @@
-from datetime import timedelta, date ,datetime
-import time
+from datetime import timedelta, date
 
 def add_date():
-	today = date.today()
-	ex_date = today + timedelta(days=30)
-	pattern = '%Y-%m-%d'
-	epcho = int(time.mktime(time.strptime(str(ex_date), pattern)))
-	normal_date = datetime.fromtimestamp(epcho).strftime('%Y-%m-%d')
-	return epcho , normal_date
+    today = date.today()
+    ex_date = today + timedelta(days=30)
+    return ex_date
 
 def check_expi(saved_date):
-	today = date.today()
-	pattern = '%Y-%m-%d'
-	epcho = int(time.mktime(time.strptime(str(today), pattern)))
-	then = saved_date - epcho
-	print(then)
-	if then > 0:
-		return True
-	else:
-		return False
+    today = date.today()
+    if saved_date > today:
+        return True  # Not expired
+    else:
+        return False  # Expired
+
+# Example usage
+expiration_date = add_date()
+print("Expiration Date:", expiration_date)
+
+# Replace this with the date you want to check
+saved_date = expiration_date  
+if check_expi(saved_date):
+    print("Not expired")
+else:
+    print("Expired")
