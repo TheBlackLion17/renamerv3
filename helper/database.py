@@ -66,8 +66,9 @@ def uploadlimit(chat_id, limit):
     dbcol.update_one({"_id": chat_id}, {"$set": {"uploadlimit": limit}})
 
 def addpre(chat_id):
-    epoch, _ = add_date()
+    epoch, _ = add_date()  # Retrieve the epoch value from the tuple returned by add_date
     dbcol.update_one({"_id": chat_id}, {"$set": {"prexdate": epoch}})
+
 
 def addpredata(chat_id):
     dbcol.update_one({"_id": chat_id}, {"$set": {"prexdate": None}})
